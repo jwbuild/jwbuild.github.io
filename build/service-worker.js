@@ -7,6 +7,8 @@ self.addEventListener('push', function (event) {
         badge: data.badge || '/vite.svg',
     };
 
+    console.log('Push event received', event);
+
     event.waitUntil(
         self.registration.showNotification(title, options)
     );
@@ -17,4 +19,12 @@ self.addEventListener('notificationclick', function (event) {
     event.waitUntil(
         clients.openWindow(event.notification.data.url || '/')
     );
+});
+
+self.addEventListener('install', (event) => {
+    console.log('Service worker installed!');
+});
+  
+self.addEventListener('activate', (event) => {
+    console.log('Service worker activated!');
 });
